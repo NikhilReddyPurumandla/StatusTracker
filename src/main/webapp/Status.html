@@ -1,0 +1,214 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>       		
+  <link rel='stylesheet' href='https://www.w3schools.com/w3css/4/w3.css\'>
+  <link rel='stylesheet' href='https://fonts.googleapis.com/icon?family=Material+Icons'>
+  <link rel='stylesheet' type='text/css' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css'>
+  <link rel='stylesheet' type='text/css' href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.9.0/bootstrap-table.min.css'>
+  <link rel='stylesheet' type='text/css' href='https://cdn.datatables.net/1.10.9/css/jquery.dataTables.min.css'>
+
+
+  
+<style>
+.form-group{
+width:250px;
+}
+ body {
+ align: center;
+
+.form_bg {
+    background-color:white;
+    border-style: inset;
+    color:grey;
+    padding-left:40px;
+    border-radius:50px;
+ 
+    border:5px solid inset;
+    width: 380px;
+    height: 700px;
+    
+}
+
+
+}
+	  footer {
+        background-color: #555;
+      color: white;
+      padding-top: 10px;
+      padding-bottom: 0px; 
+      position:fixed; 
+      bottom:0;
+	  width:100%;
+    }
+    select {
+  padding: 6px;
+  height: 32px;
+  width: 6.6cm;
+  color:black;
+  border-radius: 10px;
+  
+}
+textarea{
+  padding: 6px;
+  height: 90px;
+  width: 6.6cm;
+  color:black;
+  border-radius: 10px;
+  
+}
+    .nav.navbar-nav li a {
+   color: #fff;
+ }
+
+.nav.navbar-nav a:hover {
+ color: grey;
+}
+ .form-group.required.control-label:after{
+   color: red;
+   content: "*";
+   position: absolute;
+   margin-left: 5px;
+} 
+  
+</style>
+
+	<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand "href="#">Status Tracker</a>
+    </div>
+
+  </div>
+</nav>
+
+
+
+ </head>
+<body>
+ 
+  	
+<form method="get" class="form_bg">
+ <div class="container">
+
+    <div class="col-xs-10 col-md-10">
+      <label class="form-group required control-label">Github UserName</label>
+      <input type="text" class="form-control" id="name" placeholder="uname" required><br>
+</div><br>
+<div class="col-xs-10 col-md-10">
+      <label class="form-group required control-label">Repository Name</label>
+      <input type="text" class="form-control" id="repo" placeholder="repo" required><br>
+</div><br>
+<div class="col-xs-6 col-md-6"><br>
+ <input type="button" id="btn" class="btn btn-success" value="go"/>   
+</div><br>
+
+
+
+<div class="col-xs-12 col-md-12">
+<a href="#demo" class="btn btn-info" data-toggle="collapse">Date Wise Commit History</a>
+  <div id="demo" class="collapse">
+   <div class="col-xs-6 col-md-6">
+  <label class="form-group">Select Date</label>
+  <input type='date' class='form-control' name="date" placeholder="date"></div>
+   <div class="col-xs-6 col-md-6">
+  <label class="form-group">Total Commits</label>
+  <input type=  "text" class='form-control'  name='Commits'>
+</div><br><br>
+ <br><br>
+
+      <div class="col-xs-12 col-md-12">
+       <label class="form-group">Commit log</label>
+   <table id='example' class='table table-hover table-bordered '>
+      
+       <thead><tr class='active'>
+        		<th>Name</th>
+        		<th>Email</th>
+        		<th>Total Commits</th>
+        		      
+        		</thead>
+        <tbody>
+   <tr>
+         <td></td>
+           
+           <td></td>   
+    
+           <td></td>  
+    
+  </tr>
+
+         </tbody>
+         </table>
+        
+      	
+    </div>
+ </div></div>
+ 
+
+<br><br>
+</div>
+
+  </form>
+
+
+</body>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"
+			  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+			  crossorigin="anonymous"></script>
+			  
+<script>
+	
+	
+	$("#btn").click(function(){
+		details();
+	});
+	var x;
+	function details(){
+		$.ajax({
+			var a=$("#name").val();
+			var b=$("#repo").val();
+			url:"https://api.github.com/users/"+a+"/"+b,
+			method:"GET"
+		}).done(function(data){
+			
+		 x=data;
+			
+			var y='';
+		y+= ' <div class="col-xs-6 col-md-6">'
+		y+= ' <label class="form-group">Total Commits</label>'
+		y+= ' <input type=  "text" class="form-control"  name="Commits" value="'+x.html_url+'">'
+		y+= ' </div><br><br>'
+		y+= ' <div class="col-xs-6 col-md-6">'
+		y+= ' <label class="form-group">Contributors</label>'
+		y+=  '<input type=  "text" class="form-control" name="contributors" value="'+x.html_url+'">'
+		y+= ' </div><br><br><br><br><br><br>'
+			
+			
+		}); 
+		$('#commit').html(y);
+	}
+	/* .fail{
+		debugger;
+	}  */
+</script>
+<div class="col-xs-6 col-md-6" id="commit"></div>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
