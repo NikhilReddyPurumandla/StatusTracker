@@ -1,0 +1,68 @@
+<link rel='stylesheet' href='https://www.w3schools.com/w3css/4/w3.css\'>
+  <link rel='stylesheet' href='https://fonts.googleapis.com/icon?family=Material+Icons'>
+  <link rel='stylesheet' type='text/css' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css'>
+  <link rel='stylesheet' type='text/css' href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.9.0/bootstrap-table.min.css'>
+  <link rel='stylesheet' type='text/css' href='https://cdn.datatables.net/1.10.9/css/jquery.dataTables.min.css'>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<style>
+.form-group{
+width:250px;
+}
+ body {
+ align: center;
+
+.form_bg {
+    background-color:white;
+    border-style: inset;
+    color:grey;
+    padding-left:40px;
+    border-radius:50px;
+ 
+    border:5px solid inset;
+    width: 380px;
+    height: 700px;
+    
+}
+
+
+}
+	  footer {
+        background-color: #555;
+      color: white;
+      padding-top: 10px;
+      padding-bottom: 0px; 
+      position:fixed; 
+      bottom:0;
+	  width:100%;
+    }
+    select {
+  padding: 6px;
+  height: 32px;
+  width: 6.6cm;
+  color:black;
+  border-radius: 10px;
+  
+}
+textarea{
+  padding: 6px;
+  height: 90px;
+  width: 6.6cm;
+  color:black;
+  border-radius: 10px;
+  
+}
+    .nav.navbar-nav li a {
+   color: #fff;
+ }
+
+.nav.navbar-nav a:hover {
+ color: grey;
+}
+ .form-group.required.control-label:after{
+   color: red;
+   content: "*";
+   position: absolute;
+   margin-left: 5px;
+} 
+  
+</style>
