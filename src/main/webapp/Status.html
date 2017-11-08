@@ -34,19 +34,26 @@
       <label class="form-group required control-label">Repository Name</label>
       <input type="text" class="form-control" id="repo" placeholder="repo" required><br>
 </div><br>
-   <div class="col-xs-6 col-md-6">
+   <div class="col-xs-12 col-md-12">
   <label class="form-group">Select Date</label>
   <input type='date' class='form-control' id="date" placeholder="date"></div>
-<div class="col-xs-6 col-md-6"><br>
- <input type="button" id="btn" onclick="details()"  class="btn btn-success" value="go"/>   
+<div class="col-xs-12 col-md-12"><br>
+ <input type="button" id="btn" onclick="details()"  class="btn btn-success" value="get contibutors list"/>   
 </div><br>
-<div class="col-xs-6 col-md-6"><br>
- <input type="button" id="btn" onclick="commits()"  class="btn btn-success" value="commit"/>   
+<div class="col-xs-12 col-md-12"><br>
+ <input type="button" id="btn" onclick="commits()"  class="btn btn-success" value="get commit details"/>   
 </div><br>
 
+<div class="col-xs-12 col-md-12"><br>
+  <input type="button" id="btn" onclick="dates()"  class="btn btn-success" value="go!!using date"/>
+</div><br>
 
-
- 
+ <div class="col-xs-12 col-md-12"><br>
+  <input type="button" id="btn" onclick="languages()"  class="btn btn-success" value="get languages"/>
+</div><br>
+  <div class="col-xs-12 col-md-12"><br>
+  <input type="button" id="btn" onclick="branches()"  class="btn btn-success" value="get branches"/>
+</div><br>
 
 <br><br>
 </div>
@@ -55,17 +62,11 @@
 
 
 </body>
-<div class="col-xs-4 col-md-4" id="commit"></div>
-<div class="col-xs-4 col-md-4" id="message"></div>
-
-
-
-
-  <div class="col-xs-6 col-md-6"><br>
- <input type="button" id="btn" onclick="dates()"  class="btn btn-success" value="go!!"/>   
- <div class="col-xs-4 col-md-4" id="date"></div>
-</div><br>
-  
+<div class="col-xs-6 col-md-6" id="commit"></div>
+<div class="col-xs-6 col-md-6" id="message"></div>
+<div class="col-xs-6 col-md-6" id="data"></div>
+<div class="col-xs-6 col-md-6" id="languages"></div>
+<div class="col-xs-6 col-md-6" id="branches"></div>
 
         
 
