@@ -1,0 +1,75 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<script>
+function sub() {
+	var commit={};
+	commit.name=$("#name").val();
+	commit.repo=$("#repo").val(); 
+var dataPoints = [];
+
+var chart = new CanvasJS.Chart("chartContainer", {
+	animationEnabled: true,
+	theme: "light2",
+	title: {
+		text: "Contributions chart"
+	},
+	axisY: {
+		title: "commits",
+		titleFontSize: 24
+	},
+	data: [{
+		type: "column",
+		yValueFormatString: "#,### Units",
+		dataPoints: dataPoints
+	}]
+});
+
+function addData(commit) {
+	 $.each(commit, function(i, obj){
+
+		dataPoints.push({ y: obj.contributions , label: obj.login  });
+		chart.render();
+	});
+
+
+}
+
+$.getJSON("https://api.github.com/repos/"+commit.name+"/"+commit.repo+"/contributors", addData);
+
+}
+</script>
+</head>
+<body>
+<form method="get" class="form_bg">
+ <div class="container">
+
+    <div class="col-xs-10 col-md-10">
+      <label class="form-group required control-label">Github UserName</label>
+      <input type="text" class="form-control" id="name" placeholder="uname" required><br>
+</div><br>
+<div class="col-xs-10 col-md-10">
+      <label class="form-group required control-label">Repository Name</label>
+      <input type="text" class="form-control" id="repo" placeholder="repo" required><br>
+</div><br>
+   <div class="col-xs-12 col-md-12">
+  <label class="form-group">Select Date</label>
+  <input type='date' class='form-control' id="date" placeholder="date"></div>
+<div class="col-xs-12 col-md-12"><br>
+ <input type="button" id="btn" onclick="details()"  class="btn btn-success" value="get contibutors list"/>   
+</div><br>
+<div class="col-xs-12 col-md-12"><br>
+  <input type="button" id="btn" onclick="sub()"  class="btn btn-success" value="get graph"/>
+</div>
+
+
+<br><br>
+</div>
+
+  </form>
+
+<div id="chartContainer" style="height: 370px; width: 100%;"></div>
+<script src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+<script src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script>
+</body>
+</html>

@@ -211,96 +211,83 @@
 		}); 
 		
 	}
-	var x;
-	
-	function graphs(){
-		var data={};
-    	data.name=$("#name").val();
-    	data.repo=$("#repo").val(); 
-		$.ajax({
-		
-			url:"https://api.github.com/repos/"+data.name+"/"+data.repo+"/contributors",
-			method:"GET"
-		}).done(function(data){
-			
-		 x=data;
-		 $.each(x, function(i, obj){
-		var myData = new Array(['+obj.login', '+obj.contributions']);
-		var myChart = new JSChart('chartid', 'line');
-		myChart.setDataArray(myData);
-		myChart.setAxisNameFontSize(10);
-		myChart.setAxisNameX('contributor name');
-		myChart.setAxisNameY('commits');
-		myChart.setAxisNameColor('#787878');
-		myChart.setAxisValuesNumberX(6);
-		myChart.setAxisValuesNumberY(5);
-		myChart.setAxisValuesColor('#38a4d9');
-		myChart.setAxisColor('#38a4d9');
-		myChart.setLineColor('#C71112');
-		myChart.setTitle('A customized chart');
-		myChart.setTitleColor('#383838');
-		myChart.setGraphExtend(true);
-		myChart.setGridColor('#38a4d9');
-		myChart.setSize(616, 321);
-		myChart.setAxisPaddingLeft(140);
-		myChart.setAxisPaddingRight(140);
-		myChart.setAxisPaddingTop(60);
-		myChart.setAxisPaddingBottom(45);
-		myChart.setTextPaddingLeft(105);
-		myChart.setTextPaddingBottom(12);
-		myChart.setBackgroundImage('path/background.jpg');
-		myChart.draw();
-		 });
-	   	$('#graph').html(str);
-		
-			}); 
 
-	}
-	function pie(){
-		var data={};
-    	data.name=$("#name").val();
-    	data.repo=$("#repo").val(); 
-		$.ajax({
-		
-			url:"https://api.github.com/repos/"+data.name+"/"+data.repo+"/contributors",
-			method:"GET"
-		}).done(function(data){
-			$.each(data, function(i, obj){
-		var data = [{
-			  values: ['+obj.login'],
-			  labels: ['+obj.contributions'],
-			  domain: {
-			    x: [0, .48]
-			  },
-			  
+	function sub() {
+		var commit={};
+		commit.name=$("#name").val();
+		commit.repo=$("#repo").val(); 
+	var dataPoints = [];
 
-			var layout = {
-			  title: 'Global Emissions 1990-2011',
-			  annotations: [
-			    {
-			      font: {
-			        size: 14
-			      },
-			      showarrow: false,
-			      text: 'GHG',
-			      x: 0.17,
-			      y: 0.5
-			    },
-			    {
-			      font: {
-			        size: 14
-			      },
-			      showarrow: false,
-			      text: 'CO2',
-			      x: 0.82,
-			      y: 0.5
-			    }
-			  ]
-			};
-			});
+	var chart = new CanvasJS.Chart("chartContainer", {
+		animationEnabled: true,
+		theme: "light2",
+		title: {
+			text: "Contributions chart"
+		},
+		axisY: {
+			title: "commits",
+			titleFontSize: 24
+		},
+		data: [{
+			type: "column",
+			yValueFormatString: "#,### Units",
+			dataPoints: dataPoints
+		}]
+	});
 
-			Plotly.newPlot('pie', data, layout);
+	function addData(commit) {
+		 $.each(commit, function(i, obj){
+				dataPoints.push({ y: obj.contributions , label: obj.login  });
+			chart.render();
 		});
+
+
+	}
+
+	$.getJSON("https://api.github.com/repos/"+commit.name+"/"+commit.repo+"/contributors", addData);
+
 	}
 	
-		
+	
+	
+	
+	function dategraph() {
+		var g={};
+    	g.name=$("#name").val();
+    	g.repo=$("#repo").val(); 
+    	g.date=$("#date").val();
+    	var dataPoints = [];
+	    var chart = new CanvasJS.Chart("chartContainer1",
+	    {
+	      title:{
+	        text: "Simple Date-Time Chart"
+	    },
+	    axisX:{
+	        title: "date",
+	        gridThickness: 2
+	    },
+	    axisY: {
+	        title: "commits"
+	    },
+	    data: [
+	    {        
+	        type: "area",
+	    	
+			dataPoints: dataPoints
+		}]
+	});
+
+	function addData(g) {
+		 $.each(g, function(i, obj){
+
+			dataPoints.push({ x:new Date(obj.date.format('yyyy,mm,dd'))  ,y: obj.contributions });
+			chart.render();
+		});
+
+
+	}
+
+	$.getJSON("https://api.github.com/repos/"+g.name+"/"+g.repo+"/commits?since="+g.date, addData);
+
+	}
+	

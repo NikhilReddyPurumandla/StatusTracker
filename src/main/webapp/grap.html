@@ -1,0 +1,75 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<script>
+function dategraph() {
+	var g={};
+	g.name=$("#name").val();
+	g.repo=$("#repo").val(); 
+	g.date=$("#date").val();
+	var dataPoints = [];
+    var chart = new CanvasJS.Chart("chartContainer",
+    {
+      title:{
+        text: "Simple Date-Time Chart"
+    },
+    axisY:{
+		includeZero: false
+	},
+	data: [{
+		type: "line",    
+		yValueFormatString: "#,### Units",
+		dataPoints: dataPoints
+	}]
+});
+
+function addData(commit) {
+	 $.each(commit, function(i, obj){
+
+		dataPoints.push({ y: obj.contributions  });
+		chart.render();
+	});
+
+
+
+}
+
+$.getJSON("https://api.github.com/repos/"+g.name+"/"+g.repo+"/commits?since="+g.date, addData);
+
+}
+
+</script>
+</head>
+<body>
+<form method="get" class="form_bg">
+ <div class="container">
+
+    <div class="col-xs-10 col-md-10">
+      <label class="form-group required control-label">Github UserName</label>
+      <input type="text" class="form-control" id="name" placeholder="uname" required><br>
+</div><br>
+<div class="col-xs-10 col-md-10">
+      <label class="form-group required control-label">Repository Name</label>
+      <input type="text" class="form-control" id="repo" placeholder="repo" required><br>
+</div><br>
+   <div class="col-xs-12 col-md-12">
+  <label class="form-group">Select Date</label>
+  <input type='date' class='form-control' id="date" placeholder="date"></div>
+<div class="col-xs-12 col-md-12"><br>
+ <input type="button" id="btn" onclick="details()"  class="btn btn-success" value="get contibutors list"/>   
+</div><br>
+<div class="col-xs-12 col-md-12"><br>
+  <input type="button" id="btn" onclick="dategraph()"  class="btn btn-success" value="get graph"/>
+</div>
+
+
+<br><br>
+</div>
+
+  </form>
+
+<div id="chartContainer" style="height: 370px; width: 200%;"></div>
+<script src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+<script src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script>
+</body>
+</html>
