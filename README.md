@@ -1,14 +1,14 @@
 # StatusTracker
 A spring boot application for tracking commit history of contributers in a github using github api's and angularjs.
 
-# Pre requisites
+## Pre requisites
 Eclipse IDE or any other code editor.
 
-# Execution Flow
+## Execution Flow
 1. Run status.html file in browser.
 2. Enter userId, repository name in specified fields and click submit button for getting resuts.
 
-# License
+## License
 
 MIT License
 
